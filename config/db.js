@@ -1,14 +1,16 @@
-import mongoose from "mongoose"
-const uri = "mongodb+srv://f20202349:jA76HChtWSnWjXpV@cluster0.71663qu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+import mongoose from "mongoose";
+import colors from "colors";
 
-async function connectDB(){
-    try {
-   
-const conn= await mongoose.connect(uri,{ useNewUrlParser: true, useUnifiedTopology: true })
-        console.log(`connected to mongo db ${conn.connection.host}`)
-    } catch (error) {
-        console.log(`my error gow ${error}`)
-    }
-}
+
+const connectDB = async () => {
+  try {
+    const conn = await mongoose.connect(process.env.MONGO_URL);
+    console.log(
+      `Conneted To Mongodb Databse ${conn.connection.host}`.bgMagenta.white
+    );
+  } catch (error) {
+    console.log(`Errro in Mongodb ${error}`.bgRed.white);
+  }
+};
 
 export default connectDB;
